@@ -1,0 +1,47 @@
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #5161ce;
+  color: white;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 3;
+}
+/* Accordion CSS */
+.collapsable {
+  margin-left: 20px;
+  text-decoration: underline;
+  color: #d8d8d8;
+}
+.collapsable > i {
+  transition: all 0.3s ease-in-out;
+}
+.collapsable:hover {
+  color: white;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.collapsable:hover > i {
+  transform: rotate(-180deg);
+  transition: all 0.3s ease-in-out;
+}
+.collapse {
+  position: absolute;
+  height: 215px;
+  width: 400px;
+  background-color: white;
+  color: black;
+  overflow: hidden;
+  animation: data;
+  animation-duration: 0.5s;
+  border-radius: 8px;
+}
+@keyframes data {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 215px;
+  }
+}
