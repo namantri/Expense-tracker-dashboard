@@ -57,6 +57,7 @@ const AddUser = (props) => {
       submitAction(e);
     }
   }
+  console.log(data);
   return (
     <div className="addUserData">
       <form onSubmit={submitCheck}>
@@ -185,7 +186,7 @@ const AddUser = (props) => {
           <TextField
             variant="outlined"
             sx={{ width: "400px", marginBottom: "15px" }}
-            name="itemName"
+            name="date"
             type={"date"}
             value={date}
             onChange={onChangeHandler}

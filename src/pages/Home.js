@@ -7,7 +7,11 @@ const Home = () => {
     <div style={{ height: "100%", overflowY: "scroll" }}>
       <span id="top"></span>
       <div className="home-nav" id="top">
-        <img src={""} alt=" " className="app-logo" />
+        <img
+          src={""}
+          alt=" "
+          className="app-logo"
+        />
         <h2 className="app-name">MoneyLogic</h2>
         <div className="space"></div>
         <div className="home-options">
@@ -56,7 +60,7 @@ const Home = () => {
       <div className="advantages">
         <div className="adv">
           <img
-            src={""}
+            src={"https://moneylover.me/img/details/Transaction@4x.png"}
             alt=" "
             className="adv-img"
             style={{ float: "left", marginRight: "80px" }}
@@ -72,7 +76,7 @@ const Home = () => {
         </div>
         <div className="adv">
           <img
-            src={""}
+            src={"https://moneylover.me/img/details/Transaction@4x.png"}
             alt=" "
             className="adv-img"
             style={{ float: "right", marginLeft: "80px" }}
@@ -88,7 +92,7 @@ const Home = () => {
         </div>
         <div className="adv">
           <img
-            src={""}
+            src={"https://moneylover.me/img/details/Transaction@4x.png"}
             alt=" "
             className="adv-img"
             style={{ float: "left", marginRight: "80px" }}

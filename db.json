@@ -183,6 +183,14 @@
       "itemName": "gift",
       "date": "2023-05-02",
       "id": 23
+    },
+    {
+      "name": "Naman",
+      "category": "Necessary",
+      "expense": "2344",
+      "itemName": "Gift",
+      "date": "2023-05-05",
+      "id": 24
     }
   ]
 }

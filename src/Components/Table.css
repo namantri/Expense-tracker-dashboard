@@ -1,8 +1,7 @@
 
 .table-container {
-  height: 371px;
+  height: auto;
   padding: 40px;
-
   overflow-x: hidden;
   background-color: white;
   width: 69vw;
@@ -12,26 +11,7 @@
   
 }
 
-table {
-  scrollbar-width: auto;
-  scrollbar-color: #8f54a0 #ffffff;
-}
 
-/* Chrome, Edge, and Safari */
-table::-webkit-scrollbar {
-  width: 10px;
-  height: 50px;
-}
-
-table::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-table::-webkit-scrollbar-thumb {
-  background-color: #8f54a0;
-  border-radius: 10px;
-  border: 3px solid #ffffff;
-}
 .viewButton {
   display: inline-block;
   padding: 2px 5px;

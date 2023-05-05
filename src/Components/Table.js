@@ -13,12 +13,9 @@ const Table = () => {
       renderCell: () => {
         return (
           <div className="cellAction">
-            <a
-              // to="/users/test"
-              style={{ textDecoration: "none" }}
-            >
+           
               <div className="viewButton">Edit</div>
-            </a>
+          
 
             <div className="deleteButton">Delete</div>
           </div>

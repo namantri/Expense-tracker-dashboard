@@ -21,14 +21,6 @@
   margin-top: 0;
   color: #5161ce;
 }
-label {
-  font-size: 15px;
-  font-weight: 500;
-}
-.inputControl:hover {
-  /* border: 1px solid rgb(2, 51, 124);
-  border-collapse: collapse; */
-}
 input:focus,
 select:focus,
 textarea:focus,
@@ -38,34 +30,12 @@ button:focus {
 .option {
   height: 37px;
 }
-select {
-  border: 1px solid black;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  background: white;
-  background-image: none;
-  flex: 1;
-  padding: 0 0.5em;
-  color: black;
-  cursor: pointer;
-  font-size: 15px;
-  font-family: "Poppins", sans-serif;
-}
+
 .btn-crud.add.sub {
   margin-left: auto;
 }
 label {
   font-weight: bold;
-}
-form {
-  border-radius: 20px;
-  border-collapse: collapse;
-  width: 40vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1px;
 }
 .addUserData {
   background-color: white;

@@ -45,8 +45,28 @@
   animation-duration: 0.5s;
   border-radius: 8px;
 }
+.language-selection{
+  margin-left: 75vw;
+}
+select {
+  width: 100px;
+
+  height: 30px;
+  border: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  background: white;
+  background-image: none;
+  padding: 0 0.5em;
+  color: black;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 5px;
+}
 .login{
-    margin-left: 85vw;
+    margin-left: 4vw;
     height: 30px;
     width: 80px;
     background-color: white;

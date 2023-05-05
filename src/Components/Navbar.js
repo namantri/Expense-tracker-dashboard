@@ -10,7 +10,7 @@ const Navbar = (props) => {
   return (
     <div className="nav">
       <i className="fa fa-bars icon bars" onClick={props.toggleSidebar} ></i>
-      <select>
+      <select className="language-selection">
         <option value={"english"}>English</option>
         <option value={"german"}>German</option>
       </select>
