@@ -4,10 +4,10 @@
   width: 20vw;
   position: fixed;
   right: 0;
-  /* margin-top: 50px; */
+  margin-top: 50px;
 }
 .btn-crud.add {
-  margin-top: 5vh;
+  margin-top: 2.5vh;
   margin-left: 15vw;
   width: 40px;
   color: white;
@@ -27,7 +27,7 @@
 .user-img {
   border-radius: 50%;
   margin-left: 6vw;
-  margin-top: 2vw;
+  margin-top: 1vw;
   transition: all 0.3s ease-in-out;
 }
 .user-img:hover {
@@ -66,7 +66,7 @@ ul {
   font-weight: bold;
 }
 .user-data-container {
-  height: 300px;
+  height:280px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

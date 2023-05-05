@@ -5,20 +5,63 @@ import BarChart from "./BarChart";
 import PieChart from "./PieChart";
 import LineChart from "./LineChart";
 import Table from "./Table";
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import { dashboard } from "./ApplicationConstant";
+ChartJS.register(ArcElement, Tooltip, Legend);
 const Dashboard = () => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
   const [dailyExpense, setDailyExpense] = useState("");
+  const [entertainment, setEntertainment] = useState("");
+  const [necessary, setNecessary] = useState("");
   const filteredData = useSelector((state) => state.selectedData.selectedData);
   const bar = useSelector((state) => state.showGraph.bar);
   const pie = useSelector((state) => state.showGraph.pie);
   const line = useSelector((state) => state.showGraph.line);
   const date = new Date();
   const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  //   {
-  //     filteredData && console.log(filteredData[0]?.date);
-  //   }
+  const [Edata, setEData] = useState({
+    labels: ["Necessary Expense", "Entertainment Expense"],
+    datasets: [
+      {
+        label: "Necessary-Entertainment Expense",
+        data: [0, 0],
+        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  });
+  const getCategoryExpense = () => {
+    var res = 0;
+    var nes = 0;
+    for (var i = 0; i < filteredData.length; i++) {
+      if (filteredData[i].category === "Entertainment") {
+        res += parseInt(filteredData[i].expense);
+      } else {
+        nes += parseInt(filteredData[i].expense);
+      }
+    }
+    setEntertainment(res);
+    setNecessary(nes);
+    setEData({
+      labels: ["Necessary Expense", "Entertainment Expense"],
+      datasets: [
+        {
+          label: "Necessary-Entertainment Expense",
+          data: [nes, res],
+          backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+          borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    });
+  };
+  useEffect(() => {
+    getCategoryExpense();
+  }, [filteredData]);
+
   const [userChartData, setUserChartData] = useState({
     labels: [
       "January",
@@ -157,27 +200,61 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard">
-        <h5>Dashboard</h5>
-        <span>Hello, Naman Welcome to the Expense Dashboard</span>
+        <h5>{dashboard.dashboard}</h5>
+        <span>{dashboard.title}</span>
       </div>
+
       <div className="card-container">
         <div className="total-expense card">
           <span>Total Expense</span>
-          <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
+          <h3>
+            <i class="fa fa-inr"></i> {totalExpense ? totalExpense : "- - - -"}
+          </h3>
         </div>
         <div className="monthly-expense card">
           <span>Monthly Expense</span>
-          <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
+          <h3>
+            <i class="fa fa-inr"></i>{" "}
+            {monthlyExpense ? monthlyExpense : "- - - -"}
+          </h3>
         </div>
         <div className="todays-expense card">
           <span>Today's Expense</span>
-          <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
+          <h3>
+            <i class="fa fa-inr"></i> {dailyExpense ? dailyExpense : "- - - -"}
+          </h3>
+        </div>
+        <div className="card">
+          <span>Highest Expense</span>
+          <h3>Naman</h3>
         </div>
       </div>
+      <div className="graph-data">
+        {bar && <BarChart chartData={userChartData}></BarChart>}
+        {pie && <PieChart chartData={userChartData}></PieChart>}
+        {line && <LineChart chartData={userChartData}></LineChart>}
+        <div className="graph">
+          {" "}
+          <Doughnut data={Edata} options={{ cutoutPercentage: 20 }} />
+          <div style={{ position: "relative" }}>
+            <div className="circle-box">
+              <div style={{ marginTop: "20px" }}>
+                <div>
+                  {" "}
+                  Entertainment: <i class="fa fa-inr"></i>{" "}
+                  {entertainment ? entertainment : "- - - -"}
+                </div>
 
-      {bar && <BarChart chartData={userChartData}></BarChart>}
-      {pie && <PieChart chartData={userChartData}></PieChart>}
-      {line && <LineChart chartData={userChartData}></LineChart>}
+                <div style={{ marginTop: "10px" }}>
+                  {" "}
+                  Necessary: <i class="fa fa-inr"></i>{" "}
+                  {necessary ? necessary : "- - - -"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Table></Table>
     </div>
   );

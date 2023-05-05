@@ -10,6 +10,10 @@ const BarChart = (props) => {
     <div className="graph-show">
       <Bar
         data={props.chartData}
+        options={{
+          maintainAspectRatio: true,
+          responsive: true,
+        }}
       ></Bar>
     </div>
   );
