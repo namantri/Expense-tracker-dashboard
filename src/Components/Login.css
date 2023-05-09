@@ -11,7 +11,8 @@
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  /* margin: -20px 0 50px; */
+  overflow: hidden;
 }
 
 .heading-login {
@@ -71,7 +72,8 @@
   height: 100%;
   text-align: center;
 }
-.login-form>input {
+.login-form > input {
+  font-family: "Montserrat", sans-serif;
   background-color: #eee;
   border: none;
   padding: 12px 15px;
@@ -213,4 +215,12 @@
   margin: 0 5px;
   height: 40px;
   width: 40px;
+}
+.location-select {
+  font-family: "Montserrat", sans-serif;
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
 }

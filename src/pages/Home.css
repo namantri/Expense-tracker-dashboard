@@ -1,10 +1,17 @@
 .home-nav {
   display: flex;
-  height: 15vh;
+  height: 12vh;
   align-items: center;
   position: sticky;
   top: 0;
+  background-color: #5162cef1;
+  transition: all 0.2s ease-out;
+  z-index: 1000;
+}
+
+.home-nav.scrolled {
   background-color: white;
+  height: 15vh;
 }
 
 .app-logo {
@@ -17,6 +24,10 @@
   color: #5161ce;
   font-weight: bold;
   margin: 0;
+}
+
+.app-name.scrolled {
+  color: white;
 }
 
 .space {
@@ -69,12 +80,13 @@ a {
 
 .feature-icons {
   height: 7vh;
-  margin: 10%;
+  margin-top: 8%;
 }
 
 .feature {
   font-size: 20px;
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .advantages {
@@ -159,4 +171,38 @@ footer {
   position: fixed;
   bottom: 2%;
   right: 5%;
+}
+.bn3637 {
+  font-family: "Montserrat", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  margin-left: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  backface-visibility: hidden;
+  border: 0.3rem solid transparent;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+
+.bn37 {
+  border-color: transparent;
+  background-color: #fff;
+  color: #000;
+  transition:all 0.2s ease-in-out;
+}
+
+.bn37:hover {
+  transform: scale(1.05);
+}
+.about-section.scrolled{
+    color: white;
+}
+.about-section{
+    color: #302f2f;
 }

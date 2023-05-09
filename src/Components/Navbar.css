@@ -48,7 +48,7 @@
 .language-selection{
   margin-left: 75vw;
 }
-select {
+.language-selection {
   width: 100px;
 
   height: 30px;

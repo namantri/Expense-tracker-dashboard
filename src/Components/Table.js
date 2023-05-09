@@ -5,6 +5,13 @@ import { userColumns } from "./UserTableData";
 import { DataGrid } from "@mui/x-data-grid";
 const Table = () => {
   const data = useSelector((state) => state.data.data);
+  const userRows = data.map((arr, index) => {
+    return {
+      id: index,
+      ...arr,
+    };
+  });
+  
   const actionColumn = [
     {
       field: "action",
@@ -13,9 +20,7 @@ const Table = () => {
       renderCell: () => {
         return (
           <div className="cellAction">
-           
-              <div className="viewButton">Edit</div>
-          
+            <div className="viewButton">Edit</div>
 
             <div className="deleteButton">Delete</div>
           </div>
@@ -23,44 +28,16 @@ const Table = () => {
       },
     },
   ];
+  // console.log(userRows);
   return (
     <div>
-      <div style={{marginBottom:"80px"}}>
-        <h1 style={{ color: "grey", textAlign: "center" }}>
-          Users Expense Data
-        </h1>
+      <div style={{ marginBottom: "80px" }}>
+        <h1 style={{ color: "grey", textAlign: "center" }}>Users Data</h1>
 
-        {/* <table className="usersData">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Expense</th>
-              <th>Item Name</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((arr, index) => {
-              return (
-                <tr key={index}>
-                  <td>{arr.id}</td>
-                  <td>{arr.name}</td>
-                  <td>{arr.category}</td>
-                  <td>{arr.expense}</td>
-                  <td>{arr.itemName}</td>
-                  <td>{arr.date}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-
-        </table> */}
         <div className="table-container">
           <DataGrid
-          className="table-grid"
-            rows={data}
+            className="table-grid"
+            rows={userRows}
             columns={userColumns.concat(actionColumn)}
             initialState={{
               pagination: {
@@ -68,8 +45,31 @@ const Table = () => {
               },
             }}
             pageSizeOptions={[5, 10]}
-            
           />
+          {/* <table className="usersData">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((arr, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{arr.name}</td>
+                    <td>{arr.email}</td>
+                    <td>{arr.location}</td>
+
+                    <td>{arr.createdAt}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table> */}
         </div>
       </div>
     </div>

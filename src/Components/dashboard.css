@@ -82,7 +82,7 @@
 .graph-data {
   display: flex;
   justify-content: space-around;
-  background-color: #e1dfdf8f;
+  background-color: white;
   width: 75vw;
   margin: auto;
   border-radius: 5px;

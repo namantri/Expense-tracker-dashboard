@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 import Login from "./Components/Login";
+import AdminLogin from "./Components/AdminLogin";
 
 function App() {
   // const [data, setData] = useState([]);
@@ -19,20 +20,7 @@ function App() {
   const toggleSidebar = () => {
     setSidebar((prev) => !prev);
   };
-  const dispatch = useDispatch();
-  const getData = async () => {
-    try {
-      const res = await axios.get("http://localhost:8008/Users");
-      console.log(res.data);
-      // setData(res.data);
-      dispatch(dataAction.setData(res.data));
-    } catch (error) {
-      alert(error);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  
   return (
     <>
       <Routes>
@@ -43,12 +31,12 @@ function App() {
           element={
             <Admin
               toggleSidebar={toggleSidebar}
-              getData={getData}
               sidebar={sidebar}
             />
           }
         ></Route>
-        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/adminlogin" element={<AdminLogin />}></Route>
       </Routes>
     </>
   );

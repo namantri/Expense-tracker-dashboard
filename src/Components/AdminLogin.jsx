@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./Login.css";
 import axios from "axios";
 import Register from "./Register";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { userAuthAction } from "../Store/UserAuth";
 import { loadingAction } from "../Store/loading";
-import { Navigate } from "react-router-dom";
-const Login = () => {
-  const [active, setActive] = useState(false);
+import { Link, Navigate } from "react-router-dom";
+
+const AdminLogin = () => {
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
@@ -29,7 +29,7 @@ const Login = () => {
     try {
       dispatch(loadingAction.setLoading(true));
       const response = await axios.post(
-        `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/users/login`,
+        `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/admin/login`,
         data,
         {
           headers: {
@@ -51,7 +51,6 @@ const Login = () => {
       toast.error(error.response.data.message);
       alert(error.response.data.message);
     }
-
     setData({
       email: "",
       password: "",
@@ -74,16 +73,10 @@ const Login = () => {
   }
   console.log(data);
   //   console.log(loading);
-  if (isAuthenticated) return <Navigate to={"/user"} />;
+  if (isAuthenticated) return <Navigate to={"/admin"} />;
   return (
     <div className="login-body">
-      <div
-        class={active ? "container right-panel-active" : "container"}
-        id="container"
-      >
-        <div class="form-container sign-up-container">
-          <Register />
-        </div>
+      <div className="container">
         <div class="form-container sign-in-container">
           <form action="#" className="login-form" onSubmit={submitCheck}>
             <h1 className="heading-login">Sign in</h1>
@@ -122,30 +115,21 @@ const Login = () => {
         </div>
         <div class="overlay-container">
           <div class="overlay">
-            <div class="overlay-panel overlay-left">
-              <h1 className="heading-login">Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-              <button
-                class="btn-login ghost"
-                id="signIn"
-                onClick={() => setActive(false)}
-              >
-                Sign In
-              </button>
-            </div>
             <div class="overlay-panel overlay-right">
               <h1 className="heading-login">Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
-              <button
-                onClick={() => setActive(true)}
-                class="btn-login ghost"
-                type="submit"
-                id="signUp"
-              >
-                Sign Up
-              </button>
+              <p>
+                If you are not a Admin Please go to the User Login or Home Page
+              </p>
+              <Link to={"/login"}>
+                <button class="btn-login ghost" type="submit" id="signUp">
+                  User Login
+                </button>
+              </Link>
+              <Link to={"/"}>
+                <button class="btn-login ghost" type="submit" id="signUp">
+                  Home Page
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -154,4 +138,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

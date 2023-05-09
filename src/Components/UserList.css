@@ -39,10 +39,9 @@ ul {
   margin-left: 2vw;
 }
 .user-data {
-  height: 30px;
+  height: 40px;
   width: 15vw;
   border-radius: 3px;
-  padding: 5px 6px;
   display: flex;
   font-size: small;
   justify-content: center;

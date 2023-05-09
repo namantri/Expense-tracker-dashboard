@@ -9,21 +9,23 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const UserList = (props) => {
+  
   const dispatch = useDispatch();
-  const[name,setName] = useState("");
+  const [user, setUser] = useState("");
   const [showFormModal, setShowFormModal] = useState(false);
   const showModal = () => {
     setShowFormModal((prev) => !prev);
   };
+  const expenseData = useSelector((state) => state.expenseData.expenseData);
   const data = useSelector((state) => state.data.data);
-  const showData = (name) => {
-    const filteredData = data.filter((arr) => {
-      return name === arr.name;
+  const showData = (user) => {
+    const filteredData = expenseData.filter((arr) => {
+      return arr.user === user;
     });
-    setName(name);
+    setUser(user);
     dispatch(selectedDataAction.setSelectedData(filteredData));
   };
-  const unique = [...new Set(data.map(arr => arr.name))];
+  // const unique = [...new Set(data.map(arr => arr.email))];
   return (
     <>
       <div className="userList-container">
@@ -36,14 +38,19 @@ const UserList = (props) => {
           height="100"
           className="user-img"
         />
-        <div className="user-name">{name?name:"- - - - -"}</div>
+        <div className="user-name">{user ? user : "- - - - -"}</div>
         <div className="heading">User List:</div>
         <div className="user-data-container">
           <ul>
-            {unique.map((arr) => {
+            {data.map((arr) => {
               return (
-                <li className={name==arr?"user-data active":"user-data"} onClick={() => showData(arr)}>
-                  {arr}
+                <li
+                  className={
+                    user == arr._id ? "user-data active" : "user-data"
+                  }
+                  onClick={() => showData(arr._id)}
+                >
+                  {arr.email}
                 </li>
               );
             })}
