@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { UserDetailDataAction } from "../Store/userDetail";
 import { userExpenseDataAction } from "../Store/userExpenseData";
 import { useEffect } from "react";
 import UserDashboard from "../user/UserDashboard";
-
+import UserLeftPart from "../user/UserLeftPart";
+import "./User.css";
+import UserDetails from "../user/UserDetails";
 const User = () => {
+  const [refresh, setRefresh] = useState(false);
+  const refreshData = () => {
+    setRefresh((prev) => !prev);
+  };
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -51,10 +57,12 @@ const User = () => {
   useEffect(() => {
     getData();
     getExpenseData();
-  }, []);
+  }, [refresh]);
   return (
-    <div>
+    <div className="user-panel">
+      <UserLeftPart />
       <UserDashboard />
+      <UserDetails refreshData={refreshData} />
     </div>
   );
 };

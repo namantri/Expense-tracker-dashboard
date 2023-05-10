@@ -10,10 +10,9 @@ import Select from "@mui/material/Select";
 const AddUser = (props) => {
   const [error, setError] = useState();
   const [data, setData] = useState({
-    name: "",
     category: "",
     expense: "",
-    itemName: "",
+    description: "",
     date: "",
   });
   const onChangeHandler = (event) => {
@@ -21,12 +20,27 @@ const AddUser = (props) => {
     setData({ ...data, [event.target.name]: event.target.value });
     console.log(event.target.value);
   };
-  const { name, category, expense, itemName, date } = data;
+  const { category, expense, description, date } = data;
   const submitAction = async (e) => {
     e.preventDefault();
-    const response = await axios
-      .post("http://localhost:8008/Users", data)
-      .then(props.getData);
+    try {
+      const response = await axios.post(
+        `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/expense/newExpense`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // for cookie otherwise cookie will not work
+          withCredentials: true,
+        }
+      );
+      alert(response.data.message);
+      props.refreshData();
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+
     // if (!response) {
     //   alert("Data added in the json server");
     //   props.setMsg(`${data.name} field is added successfully`);
@@ -37,20 +51,19 @@ const AddUser = (props) => {
     // }
 
     setData({
-      name: "",
       category: "",
       expense: "",
-      itemName: "",
+      description: "",
       date: "",
     });
     props.showModal();
   };
   function submitCheck(e) {
     e.preventDefault();
-    if (name == "") setError(`Name is required `);
-    else if (category == "") setError(`Category is required`);
+
+    if (category == "") setError(`Category is required`);
     else if (expense == "") setError(`Expense is required`);
-    else if (itemName == "") setError(`Item Name is required`);
+    else if (description == "") setError(`Description is required`);
     else if (date == "") setError(`Date is required`);
     else {
       setError();
@@ -78,8 +91,9 @@ const AddUser = (props) => {
             name="name"
             type={"text"}
             sx={{ width: "400px", marginBottom: "15px" }}
-            value={name}
+            value={props.name}
             onChange={onChangeHandler}
+            disabled={true}
           />
           {/* <br></br> */}
           {/* <label htmlFor="Category">Category:</label> */}
@@ -163,12 +177,12 @@ const AddUser = (props) => {
             onChange={onChangeHandler}
           ></input> */}
           <TextField
-            label="Item Name"
+            label="Description"
             variant="outlined"
             sx={{ width: "400px", marginBottom: "15px" }}
-            name="itemName"
+            name="description"
             type={"text"}
-            value={itemName}
+            value={description}
             onChange={onChangeHandler}
           />
           {/* <br></br> */}

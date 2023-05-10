@@ -41,6 +41,7 @@ const Login = () => {
       );
       console.log(response);
       dispatch(loadingAction.setLoading(false));
+      localStorage.setItem("isAuthenticated", true);
       dispatch(userAuthAction.setIsAuthenticated(true));
       toast.success(response.data.message);
       alert(response.data.message);

@@ -22,9 +22,9 @@ ChartJS.register(
 );
 const LineChart = (props) => {
   return (
-    <div className="graph-show">
+   
       <Line data={props.chartData} />
-    </div>
+  
   );
 };
 

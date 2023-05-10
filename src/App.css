@@ -1,7 +1,11 @@
-.App{
+.App {
   width: 100vw;
   height: 100vh;
   display: flex;
-  font-family: 'Poppins', sans-serif; 
+  font-family: "Poppins", sans-serif;
   overflow: hidden;
 }
+*/{
+  box-sizing: border-box;
+}
+

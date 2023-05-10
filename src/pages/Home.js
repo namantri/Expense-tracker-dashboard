@@ -3,7 +3,7 @@ import "./Home.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "animate.css/animate.min.css";
 import { Link } from "react-router-dom";
-// import Chatboto from "../Components/Chatboto";
+// import Chatboto from "./Chatboto";
 const Home = () => {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,20 +13,28 @@ const Home = () => {
     return () => (window.onscroll = null);
   };
 
-
   return (
-    <div style={{ height: "100%" }}>
+    <div
+      className="home-container"
+      style={{ height: "100%", overflowX: "hidden" }}
+    >
       {/* <Chatboto /> */}
       <span id="top"></span>
       <div className={isScrolled ? "home-nav" : "home-nav scrolled"} id="top">
-        <img src={""} alt=" " className="app-logo" />
+        <img
+          src={
+            "https://thumbs.dreamstime.com/b/growing-graph-line-icon-business-chart-outline-vector-logo-linear-pictogram-isolated-white-pixel-perfect-illustration-95306517.jpg"
+          }
+          alt=" "
+          className="app-logo"
+        />
         <h2 className={isScrolled ? "app-name scrolled" : "app-name"}>
           MoneyLogic
         </h2>
         <div className="space"></div>
         <div className="home-options">
           <a
-            href="#new"
+            href="#about"
             className={isScrolled ? "about-section scrolled" : "about-section"}
           >
             AboutUs
@@ -224,7 +232,187 @@ const Home = () => {
         </AnimationOnScroll>
       </div>
 
-      <div className="about"></div>
+      <div className="about" id="about">
+        <div className="about">
+          <h1 className="about-header" id="about">
+            {" "}
+            Meet our Team
+          </h1>
+          <div className="about">
+            <div className="about-1">
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> APOORV JOSHI </strong>
+                </p>
+                <p>MENTOR</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> NAMAN TRIPATHI </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> FARDEEN ALAM </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.linkedin.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> ABHISHEK BHATI </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="about-2">
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> NAMAN GUPTA </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> ADITYA P SINGH </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.facebook.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="about-card">
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+                  }
+                  className="about-image"
+                />
+                <p>
+                  <strong> JAYESH SRIVASTAVA </strong>
+                </p>
+                <p>TEAM MEMBER</p>
+                <div className="about-links">
+                  <a href="http://www.twitter.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-twitter.svg" />
+                  </a>
+                  <a href="http://www.linkedin.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-fb.svg" />
+                  </a>
+                  <a href="http://www.gmail.com/" target="_blank">
+                    <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-mail.svg" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <footer>© 2022 Finsify Technology Co., Ltd. All rights reserved.</footer>
       <span className="material-symbols-rounded up">

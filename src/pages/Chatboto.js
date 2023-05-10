@@ -1,21 +1,20 @@
 import ChatBot from "react-simple-chatbot";
 import React, { useState } from "react";
-// import { ThemeProvider } from "styled-components";
-// import botimg from "./supportboticon.svg";
-// import usrimg from "./userboticon.svg";
-
+import { ThemeProvider } from "styled-components";
+// import botimg from "./supportbot.svg";
+// import usrimg from "./usricon.svg";
 const Chatboto = () => {
-  // const theme = {
-  //   background: "#EBFAFA",
-  //   fontFamily: "Sans-serif",
-  //   headerBgColor: "#5161ce",
-  //   headerFontColor: "#fff",
-  //   headerFontSize: "15px",
-  //   botBubbleColor: "#5161ce",
-  //   botFontColor: "#fff",
-  //   userBubbleColor: "#fff",
-  //   userFontColor: "#4a4a4a",
-  // };
+  const theme = {
+    background: "#EBFAFA",
+    fontFamily: "sans-serif",
+    headerBgColor: "#5161ce",
+    headerFontColor: "#fff",
+    headerFontSize: "15px",
+    botBubbleColor: "#5161ce",
+    botFontColor: "#fff",
+    userBubbleColor: "#fff",
+    userFontColor: "#4a4a4a",
+  };
   const steps = [
     {
       id: "Greet",
@@ -121,20 +120,22 @@ const Chatboto = () => {
       trigger: "thanks",
     },
   ];
-  // const [opened, setopened] = useState(false);
-  // const toggleopened = () => {
-  //   setopened(!opened);
-  // };
+  const [opened, setopened] = useState(false);
+  const toggleopened = () => {
+    setopened(!opened);
+  };
   return (
-    <div>
-      <ChatBot
-        steps={steps}
-        // floating={true}
-        // opened={opened}
-        // botAvatar={botimg}
-        // userAvatar={usrimg}
-        // togglefloating={toggleopened}
-      />
+    <div className="chatbot-div">
+      <ThemeProvider theme={theme}>
+        <ChatBot
+          steps={steps}
+          floating={true}
+          opened={opened}
+          // botAvatar={botimg}
+          // userAvatar={usrimg}
+          togglefloating={toggleopened}
+        />
+      </ThemeProvider>
     </div>
   );
 };

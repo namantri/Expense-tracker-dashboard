@@ -25,7 +25,7 @@ const UserList = (props) => {
     setUser(user);
     dispatch(selectedDataAction.setSelectedData(filteredData));
   };
-  // const unique = [...new Set(data.map(arr => arr.email))];
+  const unique = [...new Set(data.map(arr => arr.email))];
   return (
     <>
       <div className="userList-container">

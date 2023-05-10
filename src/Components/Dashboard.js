@@ -8,6 +8,7 @@ import Table from "./Table";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { dashboard } from "./ApplicationConstant";
+import { userColumns } from "./UserTableData";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const Dashboard = () => {
   const [totalExpense, setTotalExpense] = useState("");
@@ -19,6 +20,13 @@ const Dashboard = () => {
   const bar = useSelector((state) => state.showGraph.bar);
   const pie = useSelector((state) => state.showGraph.pie);
   const line = useSelector((state) => state.showGraph.line);
+  const userdata = useSelector((state) => state.data.data);
+  const userRows = userdata.map((arr, index) => {
+    return {
+      id: index,
+      ...arr,
+    };
+  });
   const date = new Date();
   const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const [Edata, setEData] = useState({
@@ -230,9 +238,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="graph-data">
-        {bar && <BarChart chartData={userChartData}></BarChart>}
-        {pie && <PieChart chartData={userChartData}></PieChart>}
-        {line && <LineChart chartData={userChartData}></LineChart>}
+        <div className="graph-show">
+          {bar && <BarChart chartData={userChartData}></BarChart>}
+          {pie && <PieChart chartData={userChartData}></PieChart>}
+          {line && <LineChart chartData={userChartData}></LineChart>}
+        </div>
         <div className="graph">
           {" "}
           <Doughnut data={Edata} options={{ cutoutPercentage: 20 }} />
@@ -255,7 +265,15 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Table></Table>
+      <div>
+        <div style={{ marginBottom: "80px" }}>
+          <h1 style={{ color: "grey", textAlign: "center" }}>Users Data</h1>
+
+          <div className="table-container">
+            <Table userRows={userRows} userColumns={userColumns}></Table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
