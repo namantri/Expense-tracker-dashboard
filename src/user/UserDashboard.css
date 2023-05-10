@@ -1,0 +1,12 @@
+.user-dashboard-container {
+  margin: 0;
+  width: 60vw;
+  margin-left: 20vw;
+  height: 100vh;
+}
+.user-graph-show {
+  width: 99%;
+}
+.user-expense-table{
+    width: 57vw;
+}

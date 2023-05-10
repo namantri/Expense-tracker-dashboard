@@ -7,7 +7,7 @@ import { Bar } from "react-chartjs-2";
 
 const BarChart = (props) => {
   return (
-    <div className="graph-show">
+    
       <Bar
         data={props.chartData}
         options={{
@@ -15,7 +15,7 @@ const BarChart = (props) => {
           responsive: true,
         }}
       ></Bar>
-    </div>
+ 
   );
 };
 

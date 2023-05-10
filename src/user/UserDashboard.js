@@ -4,6 +4,10 @@ import PieChart from "../Components/PieChart";
 import LineChart from "../Components/LineChart";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import "./UserDashboard.css";
+import axios from "axios";
+import { userExpenseColumn } from "../Components/userExpenseTable";
+import Table from "../Components/Table";
 const UserDashboard = () => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
@@ -147,18 +151,64 @@ const UserDashboard = () => {
       ],
     });
   };
+  const [expenseData, setExpenseData] = useState([]);
+  const getExpenseData = async () => {
+    try {
+      const response = await axios.get(
+        "https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/expense/myExpense",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // for cookie otherwise cookie will not work
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      const userRows = response.data.userExpense.map((arr, index) => {
+        return {
+          id: index,
+          ...arr,
+        };
+      });
+      setExpenseData(userRows);
+    } catch (error) {
+      alert(error);
+    }
+  };
+  const userColumnExpenseData = [
+    ...userExpenseColumn,
+    {
+      field: "action",
+      headerName: "Action",
+      width: 120,
+      renderCell: () => {
+        return (
+          <div className="cellAction">
+            <div className="viewButton" onClick={() => {}}>
+              Edit
+            </div>
+            <div className="deleteButton" onClick={() => {}}>
+              Delete
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
   useEffect(() => {
     graphData();
     getTotalExpense();
     getMonthlyExpense();
     getTodaysExpense();
+    getExpenseData();
   }, [userExpenseData]);
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container user-dashboard-container">
       <div className="dashboard">
         <h5>Dashboard</h5>
-        <span>Hello, Naman Welcome to the Expense Dashboard</span>
+        <span>Hello, {userData.name} Welcome to the Expense Dashboard</span>
       </div>
       <div className="card-container">
         <div className="total-expense card">
@@ -174,10 +224,24 @@ const UserDashboard = () => {
           <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
         </div>
       </div>
-      
-      {bar && <BarChart chartData={userChartData}></BarChart>}
-      {pie && <PieChart chartData={userChartData}></PieChart>}
-      {line && <LineChart chartData={userChartData}></LineChart>}
+      <div className="user-graph-show">
+        {bar && <BarChart chartData={userChartData}></BarChart>}
+        {pie && <PieChart chartData={userChartData}></PieChart>}
+        {line && <LineChart chartData={userChartData}></LineChart>}
+      </div>
+      <div style={{ marginBottom: "80px" }}>
+        <h1 style={{ color: "grey", textAlign: "center" }}>
+          Users Expense Data
+        </h1>
+
+        <div className="table-container user-expense-table">
+          {" "}
+          <Table
+            userRows={expenseData}
+            userColumns={userColumnExpenseData}
+          ></Table>{" "}
+        </div>
+      </div>
     </div>
   );
 };

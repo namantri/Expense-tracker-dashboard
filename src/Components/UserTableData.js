@@ -1,26 +1,26 @@
 
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "id", headerName: "ID", width: 100 },
   {
     field: "name",
     headerName: "Name",
-    width: 105,
+    width: 125,
   },
 
   {
     field: "email",
     headerName: "Category",
-    width: 195,
+    width: 220,
   },
   {
     field: "location",
-    headerName: "Expense",
-    width: 100,
+    headerName: "Location",
+    width: 115,
   },
   {
     field: "createdAt",
-    headerName: "Item Name",
-    width: 100,
+    headerName: "Created At",
+    width: 250,
   },
   //   {
   //     field: "date",

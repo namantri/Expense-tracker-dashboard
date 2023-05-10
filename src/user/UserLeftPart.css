@@ -1,0 +1,16 @@
+.user-graph-list>ul{
+   margin: 0;
+   margin-left: 3vw;
+   margin-top: 5vh;
+}
+.user-graph-list>ul>li{
+    line-height: 80px;
+ }
+ .user-left-part{
+    z-index: 1;
+ }
+ .user-graph-list{
+    height: 50vh;
+    margin-top: 15vh;
+
+ }
