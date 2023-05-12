@@ -1,6 +1,11 @@
 .userList-user{
   margin: 0%;
 }
+
+.userList-container{
+    border-left: 1px solid gray;
+}
+
 .user-panel-img{
     margin-top: 5vh;
     margin-bottom: 2vh;
