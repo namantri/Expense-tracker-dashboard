@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Navbar.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
