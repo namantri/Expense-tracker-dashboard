@@ -289,37 +289,47 @@ const UserDashboard = (props) => {
     p: 4,
   };
 
-  return (
-    <>
-      <div className="dashboard-container user-dashboard-container">
-        <div className="dashboard">
-          <h5>Dashboard</h5>
-          <span>Hello, {userData.name} Welcome to the Expense Dashboard</span>
-        </div>
-        <div className="card-container">
-          <div className="total-expense card">
-            <span>Total Expense</span>
-            <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
-          </div>
-          <div className="monthly-expense card">
-            <span>Monthly Expense</span>
-            <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
-          </div>
-          <div className="todays-expense card">
-            <span>Today's Expense</span>
-            <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
-          </div>
-        </div>
-        <ProgressBar expend={monthlyExpense} />
-        <div className="user-graph-show">
-          {bar && <BarChart chartData={userChartData}></BarChart>}
-          {pie && <PieChart chartData={userChartData}></PieChart>}
-          {line && <LineChart chartData={userChartData}></LineChart>}
-        </div>
-        <div style={{ marginBottom: "80px" }}>
-          <h1 style={{ color: "grey", textAlign: "center" }}>
-            Users Expense Data
-          </h1>
+    return (
+        <>
+            <div className="dashboard-container user-dashboard-container">
+                <div className="dashboard">
+                    <div className="dashboard-header">
+                        <div className="dashboard-header-name">Dashboard</div>
+                        <div>
+                            Hello,{" "}
+                            <span
+                                style={{ color: "#5162ce", fontWeight: "500" }}
+                            >
+                                {userData.name}
+                            </span>{" "}
+                            Welcome to the Expense Dashboard
+                        </div>
+                    </div>
+                </div>
+                <div className="card-container">
+                    <div className="total-expense card">
+                        <span>Total Expense</span>
+                        <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
+                    </div>
+                    <div className="monthly-expense card">
+                        <span>Monthly Expense</span>
+                        <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
+                    </div>
+                    <div className="todays-expense card">
+                        <span>Today's Expense</span>
+                        <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
+                    </div>
+                </div>
+                <ProgressBar expend={monthlyExpense} />
+                <div className="user-graph-show">
+                    {bar && <BarChart chartData={userChartData}></BarChart>}
+                    {pie && <PieChart chartData={userChartData}></PieChart>}
+                    {line && <LineChart chartData={userChartData}></LineChart>}
+                </div>
+                <div style={{ marginBottom: "80px" }}>
+                    <h1 style={{ color: "grey", textAlign: "center" }}>
+                        Users Expense Data
+                    </h1>
 
           <div className="table-container user-expense-table">
             {" "}
