@@ -61,7 +61,7 @@ const User = () => {
   return (
     <div className="user-panel">
       <UserLeftPart />
-      <UserDashboard />
+      <UserDashboard refreshData={refreshData}/>
       <UserDetails refreshData={refreshData} />
     </div>
   );

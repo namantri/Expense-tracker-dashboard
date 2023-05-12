@@ -8,7 +8,14 @@ import "./UserDashboard.css";
 import axios from "axios";
 import { userExpenseColumn } from "../Components/userExpenseTable";
 import Table from "../Components/Table";
-const UserDashboard = () => {
+import EditExpenseUser from "../Components/EditExpenseUser";
+import Backdrop from "../Components/Backdrop";
+import DeleteUserModal from "../Components/DeleteUserModal";
+import Box from "@mui/material/Box";
+// import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+const UserDashboard = (props) => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
   const [dailyExpense, setDailyExpense] = useState("");
@@ -19,7 +26,10 @@ const UserDashboard = () => {
     (state) => state.userExpenseData.userExpenseData
   );
   const userData = useSelector((state) => state.userDetailData.userDetailData);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const toggleDeleteMdoal = () => {
+    setShowDeleteModal((prev) => !prev);
+  };
   const date = new Date();
   const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const getTotalExpense = () => {
@@ -176,19 +186,56 @@ const UserDashboard = () => {
       alert(error);
     }
   };
+  const [id, setId] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const deleteData = (id) => {
+    toggleDeleteMdoal();
+    setDeleteId(id);
+  };
+  const deleteExpenseData = async () => {
+    try {
+      const response = await axios.delete(
+        `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/expense/${deleteId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // for cookie otherwise cookie will not work
+          withCredentials: true,
+        }
+      );
+      alert(response.data.message);
+      setDeleteId("");
+      props.refreshData();
+    } catch (error) {
+      alert(error.response.data.message);
+      setDeleteId("");
+    }
+  };
+  const editData = (id) => {
+    console.log(id);
+    setId(id);
+    showModal();
+  };
   const userColumnExpenseData = [
     ...userExpenseColumn,
     {
       field: "action",
       headerName: "Action",
       width: 120,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="viewButton" onClick={() => {}}>
+            <div
+              className="viewButton"
+              onClick={() => editData(params.row._id)}
+            >
               Edit
             </div>
-            <div className="deleteButton" onClick={() => {}}>
+            <div
+              className="deleteButton"
+              onClick={() => deleteData(params.row._id)}
+            >
               Delete
             </div>
           </div>
@@ -196,6 +243,11 @@ const UserDashboard = () => {
       },
     },
   ];
+  const [showFormModal, setShowFormModal] = useState(false);
+  const showModal = () => {
+    setShowFormModal((prev) => !prev);
+  };
+  console.log(showFormModal);
   useEffect(() => {
     graphData();
     getTotalExpense();
@@ -203,46 +255,97 @@ const UserDashboard = () => {
     getTodaysExpense();
     getExpenseData();
   }, [userExpenseData]);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 500,
+    height:220,
+    bgcolor: "background.paper",
+    border: "none",
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
-    <div className="dashboard-container user-dashboard-container">
-      <div className="dashboard">
-        <h5>Dashboard</h5>
-        <span>Hello, {userData.name} Welcome to the Expense Dashboard</span>
-      </div>
-      <div className="card-container">
-        <div className="total-expense card">
-          <span>Total Expense</span>
-          <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
+    <>
+      <div className="dashboard-container user-dashboard-container">
+        <div className="dashboard">
+          <h5>Dashboard</h5>
+          <span>Hello, {userData.name} Welcome to the Expense Dashboard</span>
         </div>
-        <div className="monthly-expense card">
-          <span>Monthly Expense</span>
-          <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
+        <div className="card-container">
+          <div className="total-expense card">
+            <span>Total Expense</span>
+            <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
+          </div>
+          <div className="monthly-expense card">
+            <span>Monthly Expense</span>
+            <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
+          </div>
+          <div className="todays-expense card">
+            <span>Today's Expense</span>
+            <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
+          </div>
         </div>
-        <div className="todays-expense card">
-          <span>Today's Expense</span>
-          <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
+        <div className="user-graph-show">
+          {bar && <BarChart chartData={userChartData}></BarChart>}
+          {pie && <PieChart chartData={userChartData}></PieChart>}
+          {line && <LineChart chartData={userChartData}></LineChart>}
         </div>
-      </div>
-      <div className="user-graph-show">
-        {bar && <BarChart chartData={userChartData}></BarChart>}
-        {pie && <PieChart chartData={userChartData}></PieChart>}
-        {line && <LineChart chartData={userChartData}></LineChart>}
-      </div>
-      <div style={{ marginBottom: "80px" }}>
-        <h1 style={{ color: "grey", textAlign: "center" }}>
-          Users Expense Data
-        </h1>
+        <div style={{ marginBottom: "80px" }}>
+          <h1 style={{ color: "grey", textAlign: "center" }}>
+            Users Expense Data
+          </h1>
 
-        <div className="table-container user-expense-table">
-          {" "}
-          <Table
-            userRows={expenseData}
-            userColumns={userColumnExpenseData}
-          ></Table>{" "}
+          <div className="table-container user-expense-table">
+            {" "}
+            <Table
+              userRows={expenseData}
+              userColumns={userColumnExpenseData}
+            ></Table>{" "}
+          </div>
         </div>
       </div>
-    </div>
+      {showFormModal && (
+        <EditExpenseUser
+          userExpenseData={userExpenseData}
+          showModal={showModal}
+          refreshData={props.refreshData}
+          id={id}
+          name={userData.name}
+        />
+      )}
+      {showFormModal && <Backdrop showModal={showModal}></Backdrop>}
+    
+      {/* {showDeleteModal && <Backdrop showModal={toggleDeleteMdoal}></Backdrop>} */}
+
+      <Modal
+        open={showDeleteModal}
+        onClose={toggleDeleteMdoal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Do you really want to delete?
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Once the Expense will been deleted, you no longer will have access
+            to that information.
+          </Typography>
+          <div className="delete-modal-btn-container">
+            <button className="modal-btn-delete green" onClick={toggleDeleteMdoal}>
+              Cancel
+            </button>
+            <button className="modal-btn-delete red" onClick={deleteExpenseData}>
+              Delete
+            </button>
+          </div>
+        </Box>
+      </Modal>
+    </>
   );
 };
 

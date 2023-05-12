@@ -309,3 +309,11 @@ footer {
   border-radius: 10px;
   border: 3px solid #ffffff;
 }
+@media (max-width: 850px) {
+  .space{
+    width: 30%;
+  }
+  .home-heading{
+    margin-top: 25%;
+  }
+}

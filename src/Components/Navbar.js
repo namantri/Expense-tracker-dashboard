@@ -28,11 +28,29 @@ const Navbar = (props) => {
 
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-      toast.success("Logged out Successfully");
-      alert("logged Out successfulyy")
+      toast.success(`Logged Out Successfully`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert("logged Out successfulyy")
     } catch (error) {
       //   console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
     }
@@ -43,7 +61,7 @@ const Navbar = (props) => {
       <i className="fa fa-bars icon bars" onClick={props.toggleSidebar}></i>
       <select className="language-selection">
         <option value={""} selected>
-          Select
+          Language
         </option>
         <option value={"english"}>English</option>
         <option value={"german"}>German</option>

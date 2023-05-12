@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Login.css";
 import axios from "axios";
 import Register from "./Register";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { userAuthAction } from "../Store/UserAuth";
 import { loadingAction } from "../Store/loading";
@@ -43,14 +44,31 @@ const Login = () => {
       dispatch(loadingAction.setLoading(false));
       localStorage.setItem("isAuthenticated", true);
       dispatch(userAuthAction.setIsAuthenticated(true));
-      toast.success(response.data.message);
-      alert(response.data.message);
+      toast.success(`Welcome back, ${response.data.message}`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert(response.data.message);
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
       console.log(error);
-      toast.error(error.response.data.message);
-      alert(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
     setData({

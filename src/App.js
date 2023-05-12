@@ -5,7 +5,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dataAction } from "./Store/userData";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
@@ -20,7 +21,7 @@ function App() {
   const toggleSidebar = () => {
     setSidebar((prev) => !prev);
   };
-  
+
   return (
     <>
       <Routes>
@@ -28,16 +29,23 @@ function App() {
         <Route path="/user" element={<User />}></Route>
         <Route
           path="/admin"
-          element={
-            <Admin
-              toggleSidebar={toggleSidebar}
-              sidebar={sidebar}
-            />
-          }
+          element={<Admin toggleSidebar={toggleSidebar} sidebar={sidebar} />}
         ></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/adminlogin" element={<AdminLogin />}></Route>
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
-
 export const userExpenseColumn = [
   { field: "id", headerName: "ID", width: 60 },
+  { field: "_id", headerName: "userID", width: 0},
   {
     field: "expense",
     headerName: "Expense",
@@ -16,11 +16,9 @@ export const userExpenseColumn = [
     headerName: "Category",
     width: 120,
   },
-    {
-      field: "description",
-      headerName: "Description",
-      width: 130,
-    },
-    
+  {
+    field: "description",
+    headerName: "Description",
+    width: 130,
+  },
 ];
-
