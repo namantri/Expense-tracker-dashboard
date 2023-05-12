@@ -42,13 +42,30 @@ const AdminLogin = () => {
       console.log(response);
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
-      toast.success(response.data.message);
-      alert(response.data.message);
+      toast.success(`Hello,${response.data.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert(response.data.message);
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-      console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       alert(error.response.data.message);
     }
     setData({

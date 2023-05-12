@@ -2,6 +2,8 @@ import React from "react";
 import BarChart from "../Components/BarChart";
 import PieChart from "../Components/PieChart";
 import LineChart from "../Components/LineChart";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "./UserDashboard.css";
@@ -15,6 +17,7 @@ import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import ProgressBar from "../Components/ProgressBar";
 const UserDashboard = (props) => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
@@ -204,11 +207,29 @@ const UserDashboard = (props) => {
           withCredentials: true,
         }
       );
-      alert(response.data.message);
+      toast.success(response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setDeleteId("");
       props.refreshData();
     } catch (error) {
-      alert(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setDeleteId("");
     }
   };
@@ -261,7 +282,7 @@ const UserDashboard = (props) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 500,
-    height:220,
+    height: 220,
     bgcolor: "background.paper",
     border: "none",
     boxShadow: 24,
@@ -289,6 +310,7 @@ const UserDashboard = (props) => {
             <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
           </div>
         </div>
+        <ProgressBar expend={monthlyExpense} />
         <div className="user-graph-show">
           {bar && <BarChart chartData={userChartData}></BarChart>}
           {pie && <PieChart chartData={userChartData}></PieChart>}
@@ -318,7 +340,7 @@ const UserDashboard = (props) => {
         />
       )}
       {showFormModal && <Backdrop showModal={showModal}></Backdrop>}
-    
+
       {/* {showDeleteModal && <Backdrop showModal={toggleDeleteMdoal}></Backdrop>} */}
 
       <Modal
@@ -336,10 +358,16 @@ const UserDashboard = (props) => {
             to that information.
           </Typography>
           <div className="delete-modal-btn-container">
-            <button className="modal-btn-delete green" onClick={toggleDeleteMdoal}>
+            <button
+              className="modal-btn-delete green"
+              onClick={toggleDeleteMdoal}
+            >
               Cancel
             </button>
-            <button className="modal-btn-delete red" onClick={deleteExpenseData}>
+            <button
+              className="modal-btn-delete red"
+              onClick={deleteExpenseData}
+            >
               Delete
             </button>
           </div>
