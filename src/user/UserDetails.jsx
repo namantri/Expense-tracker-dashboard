@@ -39,11 +39,29 @@ const UserDetails = (props) => {
       dispatch(loadingAction.setLoading(false));
       localStorage.removeItem("isAuthenticated");
       dispatch(userAuthAction.setIsAuthenticated(false));
-      toast.success("Logged out Successfully");
-      alert("logged Out successfulyy");
+      toast.success("Logged out Successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert("logged Out successfulyy");
     } catch (error) {
       console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
     }

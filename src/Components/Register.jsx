@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { userAuthAction } from "../Store/UserAuth";
 import { loadingAction } from "../Store/loading";
@@ -39,15 +40,35 @@ const Register = () => {
           withCredentials: true,
         }
       );
-    //   console.log(response);
+      //   console.log(response);
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
-      alert(response.data.message);
+      // alert(response.data.message);
+      toast.success(`Hello ,${response.data.message}`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-    //   console.log(error);
-      toast.error(error.response.data.message);
+      //   console.log(error);
+      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
     setData({
@@ -57,10 +78,10 @@ const Register = () => {
       location: "",
     });
   };
-//   useEffect(() => {
-//     console.log(isAuthenticated);
-//     console.log(loading);
-//   }, [isAuthenticated, loading]);
+  //   useEffect(() => {
+  //     console.log(isAuthenticated);
+  //     console.log(loading);
+  //   }, [isAuthenticated, loading]);
 
   function submitCheck(e) {
     e.preventDefault();
@@ -73,9 +94,9 @@ const Register = () => {
       submitAction(e);
     }
   }
-//   console.log(data);
-//   console.log(loading);
-    if (isAuthenticated) return <Navigate to={"/user"} />;
+  //   console.log(data);
+  //   console.log(loading);
+  if (isAuthenticated) return <Navigate to={"/user"} />;
   return (
     <form action="#" className="login-form" onSubmit={submitCheck}>
       <h1 className="heading-login">Create Account</h1>

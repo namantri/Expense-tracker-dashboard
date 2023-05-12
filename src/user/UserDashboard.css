@@ -45,3 +45,27 @@
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     padding: 2px;
 }
+#modal-modal-description{
+  margin-bottom: 5vh;
+  font-family: 'Poppins', sans-serif;
+}
+.delete-modal-btn-container{
+    float: right;
+}
+.modal-btn-delete{
+  margin-right: 15px;
+  border-radius: 5px;
+  height: 30px;
+  width: 80px;
+}
+.modal-btn-delete.green{
+  background-color: transparent;
+  border: 1px solid greenyellow;
+  color: yellowgreen;
+}
+.modal-btn-delete.red{
+  background-color: red;
+  border: none;
+  color: white;
+}
+

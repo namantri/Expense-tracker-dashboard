@@ -1,6 +1,6 @@
 
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 100 },
+  { field: "id", headerName: "ID", width: 100,hideable: false },
   {
     field: "name",
     headerName: "Name",

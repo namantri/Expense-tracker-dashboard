@@ -17,10 +17,12 @@
   padding: 40px 20px;
   border-radius: 20px;
 }
+
 .addUserData h2 {
   margin-top: 0;
   color: #5161ce;
 }
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -30,7 +32,6 @@ button:focus {
 .option {
   height: 37px;
 }
-
 .btn-crud.add.sub {
   margin-left: auto;
 }
