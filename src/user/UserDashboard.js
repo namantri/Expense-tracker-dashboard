@@ -12,12 +12,12 @@ import { userExpenseColumn } from "../Components/userExpenseTable";
 import Table from "../Components/Table";
 import EditExpenseUser from "../Components/EditExpenseUser";
 import Backdrop from "../Components/Backdrop";
-import DeleteUserModal from "../Components/DeleteUserModal";
 import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ProgressBar from "../Components/ProgressBar";
+import { TextField } from "@mui/material";
 const UserDashboard = (props) => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
@@ -32,6 +32,15 @@ const UserDashboard = (props) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const toggleDeleteMdoal = () => {
     setShowDeleteModal((prev) => !prev);
+  };
+  const [datePicker, setDatePicker] = useState({
+    from: "",
+    to: "",
+  });
+  const { from, to } = datePicker;
+  const onChangeHandler = (e) => {
+    setDatePicker({ ...datePicker, [e.target.name]: e.target.value });
+    graphData();
   };
   const date = new Date();
   const data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -65,6 +74,7 @@ const UserDashboard = (props) => {
     }
     setDailyExpense(res);
   };
+
   const [userChartData, setUserChartData] = useState({
     labels: [
       "January",
@@ -107,11 +117,23 @@ const UserDashboard = (props) => {
     ],
   });
   const graphData = () => {
-    for (var i = 0; i < userExpenseData.length; i++) {
-      const userDate = new Date(userExpenseData[i].date);
-      data[userDate.getMonth()] += parseInt(userExpenseData[i].expense);
+    if (!from || !to) {
+      for (let i = 0; i < userExpenseData.length; i++) {
+        const userDate = new Date(userExpenseData[i].date);
+        data[userDate.getMonth()] += parseInt(userExpenseData[i].expense);
+      }
+    } else {
+      const fr = new Date(from);
+      const t = new Date(to);
+
+      for (let i = 0; i < userExpenseData.length; i++) {
+        const userDate = new Date(userExpenseData[i].date);
+
+        if (userDate >= fr && userDate <= t) {
+          data[userDate.getMonth()] += parseInt(userExpenseData[i].expense);
+        }
+      }
     }
-    console.log(data);
     setUserChartData({
       labels: [
         "January",
@@ -164,6 +186,7 @@ const UserDashboard = (props) => {
       ],
     });
   };
+
   const [expenseData, setExpenseData] = useState([]);
   const getExpenseData = async () => {
     try {
@@ -177,7 +200,7 @@ const UserDashboard = (props) => {
           withCredentials: true,
         }
       );
-      console.log(response);
+
       const userRows = response.data.userExpense.map((arr, index) => {
         return {
           id: index,
@@ -186,7 +209,16 @@ const UserDashboard = (props) => {
       });
       setExpenseData(userRows);
     } catch (error) {
-      alert(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const [id, setId] = useState("");
@@ -234,7 +266,6 @@ const UserDashboard = (props) => {
     }
   };
   const editData = (id) => {
-    console.log(id);
     setId(id);
     showModal();
   };
@@ -268,7 +299,7 @@ const UserDashboard = (props) => {
   const showModal = () => {
     setShowFormModal((prev) => !prev);
   };
-  console.log(showFormModal);
+
   useEffect(() => {
     graphData();
     getTotalExpense();
@@ -276,6 +307,9 @@ const UserDashboard = (props) => {
     getTodaysExpense();
     getExpenseData();
   }, [userExpenseData]);
+  useEffect(() => {
+    graphData();
+  }, [to, from]);
   const style = {
     position: "absolute",
     top: "50%",
@@ -289,47 +323,73 @@ const UserDashboard = (props) => {
     p: 4,
   };
 
-    return (
-        <>
-            <div className="dashboard-container user-dashboard-container">
-                <div className="dashboard">
-                    <div className="dashboard-header">
-                        <div className="dashboard-header-name">Dashboard</div>
-                        <div>
-                            Hello,{" "}
-                            <span
-                                style={{ color: "#5162ce", fontWeight: "500" }}
-                            >
-                                {userData.name}
-                            </span>{" "}
-                            Welcome to the Expense Dashboard
-                        </div>
-                    </div>
-                </div>
-                <div className="card-container">
-                    <div className="total-expense card">
-                        <span>Total Expense</span>
-                        <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
-                    </div>
-                    <div className="monthly-expense card">
-                        <span>Monthly Expense</span>
-                        <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
-                    </div>
-                    <div className="todays-expense card">
-                        <span>Today's Expense</span>
-                        <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
-                    </div>
-                </div>
-                <ProgressBar expend={monthlyExpense} />
-                <div className="user-graph-show">
-                    {bar && <BarChart chartData={userChartData}></BarChart>}
-                    {pie && <PieChart chartData={userChartData}></PieChart>}
-                    {line && <LineChart chartData={userChartData}></LineChart>}
-                </div>
-                <div style={{ marginBottom: "80px" }}>
-                    <h1 style={{ color: "grey", textAlign: "center" }}>
-                        Users Expense Data
-                    </h1>
+  return (
+    <>
+      <div className="dashboard-container user-dashboard-container">
+        <div className="dashboard">
+          <div className="dashboard-header">
+            <div className="dashboard-header-name">Dashboard</div>
+            <div>
+              Hello,{" "}
+              <span style={{ color: "#5162ce", fontWeight: "500" }}>
+                {userData.name}
+              </span>{" "}
+              Welcome to the Expense Dashboard
+            </div>
+          </div>
+        </div>
+        <div className="card-container">
+          <div className="total-expense card">
+            <span>Total Expense</span>
+            <h3>{totalExpense ? totalExpense : "- - - -"}</h3>
+          </div>
+          <div className="monthly-expense card">
+            <span>Monthly Expense</span>
+            <h3>{monthlyExpense ? monthlyExpense : "- - - -"}</h3>
+          </div>
+          <div className="todays-expense card">
+            <span>Today&apos;s Expense</span>
+            <h3>{dailyExpense ? dailyExpense : "- - - -"}</h3>
+          </div>
+        </div>
+        <ProgressBar expend={monthlyExpense} />
+        <div className="user-graph-show">
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            {" "}
+            <div>
+              <label className="label-for-date">From:</label>
+              <TextField
+                variant="outlined"
+                sx={{ width: "200px", marginBottom: "15px" }}
+                name="from"
+                type={"date"}
+                size="small"
+                value={from}
+                onChange={onChangeHandler}
+              />
+            </div>
+            <div>
+              <lable className="label-for-date">To:</lable>
+              <TextField
+                variant="outlined"
+                sx={{ width: "200px", marginBottom: "15px" }}
+                name="to"
+                type={"date"}
+                size="small"
+                value={to}
+                onChange={onChangeHandler}
+              />
+            </div>
+          </div>
+
+          {bar && <BarChart chartData={userChartData}></BarChart>}
+          {pie && <PieChart chartData={userChartData}></PieChart>}
+          {line && <LineChart chartData={userChartData}></LineChart>}
+        </div>
+        <div style={{ marginBottom: "80px" }}>
+          <h1 style={{ color: "grey", textAlign: "center" }}>
+            Users Expense Data
+          </h1>
 
           <div className="table-container user-expense-table">
             {" "}

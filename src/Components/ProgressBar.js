@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProgressBar.css";
 import progressicn from "./progressicon.png";
 
@@ -9,6 +9,7 @@ const ProgressBar = (props) => {
 
   const calc = () => {
     temp = (parseInt(expend) / parseInt(ref)) * 100;
+    if (temp > 99) temp = 99;
   };
   return (
     <div>

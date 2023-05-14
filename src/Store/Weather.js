@@ -5,7 +5,7 @@ import "./Weather.css";
 const Weather = (props) => {
   const [tempInfo, setTempInfo] = useState({});
   const [weatherState, setWeatherState] = useState("");
-  console.log(props.location);
+ 
   const getWeatherInfo = async () => {
     try {
       let url = `https://api.openweathermap.org/data/2.5/weather?q=${props?.location}&units=metric&appid=0a08481a03da497161baa8363ea4b26d`;
@@ -29,7 +29,16 @@ const Weather = (props) => {
       };
       setTempInfo(myNewWeatherInfo);
     } catch (error) {
-      console.log(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const {
@@ -40,7 +49,7 @@ const Weather = (props) => {
     name,
     speed,
     country,
-    sunset,
+  
   } = tempInfo;
 
   useEffect(() => {
@@ -68,9 +77,6 @@ const Weather = (props) => {
     }
   }, [weathermood,props.location]);
 
-  let sec = sunset;
-  let date = new Date(sec * 1000);
-  let timeStr = `${date.getHours()}:${date.getMinutes()}`;
 
   return (
     <div className="weather-card">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -40,10 +40,10 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      //   console.log(response);
+   
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
-      // alert(response.data.message);
+     
       toast.success(`Hello ,${response.data.message}`, {
         position: "top-center",
         autoClose: 3000,
@@ -57,8 +57,7 @@ const Register = () => {
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-      //   console.log(error);
-      // toast.error(error.response.data.message);
+     
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 3000,
@@ -78,10 +77,7 @@ const Register = () => {
       location: "",
     });
   };
-  //   useEffect(() => {
-  //     console.log(isAuthenticated);
-  //     console.log(loading);
-  //   }, [isAuthenticated, loading]);
+ 
 
   function submitCheck(e) {
     e.preventDefault();
@@ -94,8 +90,7 @@ const Register = () => {
       submitAction(e);
     }
   }
-  //   console.log(data);
-  //   console.log(loading);
+  
   if (isAuthenticated) return <Navigate to={"/user"} />;
   return (
     <form action="#" className="login-form" onSubmit={submitCheck}>

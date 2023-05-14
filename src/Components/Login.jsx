@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import Register from "./Register";
@@ -40,7 +40,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(response);
+   
       dispatch(loadingAction.setLoading(false));
       localStorage.setItem("isAuthenticated", true);
       dispatch(userAuthAction.setIsAuthenticated(true));
@@ -54,11 +54,11 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      // alert(response.data.message);
+      
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-      console.log(error);
+  
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 3000,
@@ -76,10 +76,7 @@ const Login = () => {
       password: "",
     });
   };
-  useEffect(() => {
-    console.log(isAuthenticated);
-    console.log(loading);
-  }, [isAuthenticated, loading]);
+
 
   function submitCheck(e) {
     e.preventDefault();
@@ -91,8 +88,7 @@ const Login = () => {
       submitAction(e);
     }
   }
-  console.log(data);
-  //   console.log(loading);
+ 
   if (isAuthenticated) return <Navigate to={"/user"} />;
   return (
     <div className="login-body">

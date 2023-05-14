@@ -1,6 +1,5 @@
 import React from "react";
 import "./Table.css";
-import { useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 const Table = ({ userRows, userColumns }) => {
@@ -19,7 +18,7 @@ const Table = ({ userRows, userColumns }) => {
     //   },
     // },
   ];
-  // console.log(userRows);
+ 
   return (
     <DataGrid
       className="table-grid"

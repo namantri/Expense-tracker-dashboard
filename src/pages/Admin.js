@@ -22,12 +22,20 @@ const Admin = ({ toggleSidebar, sidebar }) => {
           withCredentials: true,
         }
       );
-      // console.log(res.data);
-      // setData(res.data);
+      
       dispatch(dataAction.setData(res.data.users));
-      console.log(res);
+   
     } catch (error) {
-      alert(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const getExpenseData = async () => {
@@ -42,12 +50,20 @@ const Admin = ({ toggleSidebar, sidebar }) => {
           withCredentials: true,
         }
       );
-      // console.log(res.data);
-      // setData(res.data);
+     
       dispatch(expenseDataAction.setExpenseData(res.data.users));
-      console.log(res);
+    
     } catch (error) {
-      alert(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   useEffect(() => {

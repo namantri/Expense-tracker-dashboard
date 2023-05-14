@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
-import Register from "./Register";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { userAuthAction } from "../Store/UserAuth";
@@ -39,7 +38,7 @@ const AdminLogin = () => {
           withCredentials: true,
         }
       );
-      console.log(response);
+
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(true));
       toast.success(`Hello,${response.data.message}`, {
@@ -66,17 +65,22 @@ const AdminLogin = () => {
         progress: undefined,
         theme: "light",
       });
-      alert(error.response.data.message);
+      toast.error(` ${error.response.data.message}`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     setData({
       email: "",
       password: "",
     });
   };
-  useEffect(() => {
-    console.log(isAuthenticated);
-    console.log(loading);
-  }, [isAuthenticated, loading]);
 
   function submitCheck(e) {
     e.preventDefault();
@@ -88,8 +92,7 @@ const AdminLogin = () => {
       submitAction(e);
     }
   }
-  console.log(data);
-  //   console.log(loading);
+
   if (isAuthenticated) return <Navigate to={"/admin"} />;
   return (
     <div className="login-body">

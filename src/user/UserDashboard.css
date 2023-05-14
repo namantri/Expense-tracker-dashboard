@@ -68,3 +68,8 @@
     border: none;
     color: white;
 }
+.label-for-date{
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+}

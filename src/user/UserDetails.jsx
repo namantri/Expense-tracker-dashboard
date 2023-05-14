@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import AddUser from "../Components/AddUser";
 import Backdrop from "../Components/Backdrop";
 import { useSelector } from "react-redux";
@@ -28,14 +28,14 @@ const UserDetails = (props) => {
   const logoutHandler = async () => {
     dispatch(loadingAction.setLoading(true));
     try {
-      const response = await axios.get(
+      await axios.get(
         `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/users/logout`,
         {
           // for cookie otherwise cookie will not work
           withCredentials: true,
         }
       );
-      console.log(response);
+    
 
       dispatch(loadingAction.setLoading(false));
       localStorage.removeItem("isAuthenticated");
@@ -52,7 +52,7 @@ const UserDetails = (props) => {
       });
       // alert("logged Out successfulyy");
     } catch (error) {
-      console.log(error.response.data.message);
+      
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 3000,

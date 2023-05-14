@@ -26,12 +26,19 @@ const User = () => {
           withCredentials: true,
         }
       );
-      // console.log(res.data);
-      // setData(res.data);
+
       dispatch(UserDetailDataAction.setUserDetailData(res.data.user));
-      console.log(res);
     } catch (error) {
-      alert(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const getExpenseData = async () => {
@@ -46,12 +53,19 @@ const User = () => {
           withCredentials: true,
         }
       );
-      // console.log(res.data);
-      // setData(res.data);
+
       dispatch(userExpenseDataAction.setUserExpenseData(res.data.userExpense));
-      console.log(res);
     } catch (error) {
-      alert(error);
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   useEffect(() => {
@@ -61,7 +75,7 @@ const User = () => {
   return (
     <div className="user-panel">
       <UserLeftPart />
-      <UserDashboard refreshData={refreshData}/>
+      <UserDashboard refreshData={refreshData} />
       <UserDetails refreshData={refreshData} />
     </div>
   );

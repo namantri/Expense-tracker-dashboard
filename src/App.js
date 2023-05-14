@@ -1,10 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { dataAction } from "./Store/userData";
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
@@ -16,12 +11,10 @@ import AdminLogin from "./Components/AdminLogin";
 
 function App() {
   // const [data, setData] = useState([]);
-  const data = useSelector((state) => state.data.data);
   const [sidebar, setSidebar] = useState(false);
   const toggleSidebar = () => {
     setSidebar((prev) => !prev);
   };
-
   return (
     <>
       <Routes>

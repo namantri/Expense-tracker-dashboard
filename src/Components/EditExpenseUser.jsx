@@ -10,12 +10,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditExpenseUser = (props) => {
-  console.log(props.userExpenseData);
-  console.log(props.id);
+  
   const userExpenseData = props.userExpenseData.filter(
     (arr) => arr._id == props.id
   );
-  console.log(userExpenseData);
+ 
   const [error, setError] = useState();
   const [data, setData] = useState({
     category: userExpenseData[0].category,
@@ -26,13 +25,13 @@ const EditExpenseUser = (props) => {
   const onChangeHandler = (event) => {
     setError();
     setData({ ...data, [event.target.name]: event.target.value });
-    console.log(event.target.value);
+   
   };
   const { category, expense, description, date } = data;
   const submitAction = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+      await axios.put(
         `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/expense/${props.id}`,
         data,
         {
@@ -87,7 +86,7 @@ const EditExpenseUser = (props) => {
       submitAction(e);
     }
   }
-  console.log(data);
+
   return (
     <div className="addUserData">
       <form onSubmit={submitCheck}>

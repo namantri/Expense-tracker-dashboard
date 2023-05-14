@@ -20,7 +20,7 @@ const AddUser = (props) => {
   const onChangeHandler = (event) => {
     setError();
     setData({ ...data, [event.target.name]: event.target.value });
-    console.log(event.target.value);
+   
   };
   const { category, expense, description, date } = data;
   const submitAction = async (e) => {
@@ -91,7 +91,7 @@ const AddUser = (props) => {
       submitAction(e);
     }
   }
-  console.log(data);
+ 
   return (
     <div className="addUserData">
       <form onSubmit={submitCheck}>

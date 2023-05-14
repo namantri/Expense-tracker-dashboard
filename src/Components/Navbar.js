@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Navbar.css";
@@ -18,14 +17,14 @@ const Navbar = (props) => {
   const logoutHandler = async () => {
     dispatch(loadingAction.setLoading(true));
     try {
-      const response = await axios.get(
+      await axios.get(
         `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/admin/logout`,
         {
           // for cookie otherwise cookie will not work
           withCredentials: true,
         }
       );
-      console.log(response);
+    
 
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
@@ -39,9 +38,9 @@ const Navbar = (props) => {
         progress: undefined,
         theme: "light",
       });
-      // alert("logged Out successfulyy")
+     
     } catch (error) {
-      //   console.log(error);
+    
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 5000,

@@ -116,7 +116,7 @@ const Dashboard = () => {
       const userDate = new Date(filteredData[i].date);
       data[userDate.getMonth()] += parseInt(filteredData[i].expense);
     }
-    console.log(data);
+
     setUserChartData({
       labels: [
         "January",
@@ -227,7 +227,7 @@ const Dashboard = () => {
           </h3>
         </div>
         <div className="todays-expense card">
-          <span>Today's Expense</span>
+          <span>Today&apos;s Expense</span>
           <h3>
             <i class="fa fa-inr"></i> {dailyExpense ? dailyExpense : "- - - -"}
           </h3>
