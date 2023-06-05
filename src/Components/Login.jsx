@@ -40,7 +40,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
-   
+    
       dispatch(loadingAction.setLoading(false));
       localStorage.setItem("isAuthenticated", true);
       dispatch(userAuthAction.setIsAuthenticated(true));
@@ -54,11 +54,10 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      
     } catch (error) {
       dispatch(loadingAction.setLoading(false));
       dispatch(userAuthAction.setIsAuthenticated(false));
-  
+
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 3000,
@@ -77,7 +76,6 @@ const Login = () => {
     });
   };
 
-
   function submitCheck(e) {
     e.preventDefault();
 
@@ -88,7 +86,7 @@ const Login = () => {
       submitAction(e);
     }
   }
- 
+
   if (isAuthenticated) return <Navigate to={"/user"} />;
   return (
     <div className="login-body">

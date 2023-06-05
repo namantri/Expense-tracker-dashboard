@@ -26,7 +26,7 @@ module.exports = {
     "no-undef": 0,
     "no-eq-null": 2,
     "no-unused-expressions": 0,
-    "no-console": 2,
+    "no-console": 1,
     "no-debugger": 2,
     "no-empty": 2,
     "no-alert": 2,

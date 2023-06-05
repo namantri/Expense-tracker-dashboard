@@ -10,11 +10,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const EditExpenseUser = (props) => {
-  
   const userExpenseData = props.userExpenseData.filter(
     (arr) => arr._id == props.id
   );
- 
+
   const [error, setError] = useState();
   const [data, setData] = useState({
     category: userExpenseData[0].category,
@@ -25,13 +24,12 @@ const EditExpenseUser = (props) => {
   const onChangeHandler = (event) => {
     setError();
     setData({ ...data, [event.target.name]: event.target.value });
-   
   };
   const { category, expense, description, date } = data;
   const submitAction = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
+      const response = await axios.put(
         `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/expense/${props.id}`,
         data,
         {
@@ -42,7 +40,8 @@ const EditExpenseUser = (props) => {
           withCredentials: true,
         }
       );
-      toast.success(error.response.data.message, {
+
+      toast.success(response?.data?.message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -54,7 +53,8 @@ const EditExpenseUser = (props) => {
       });
       props.refreshData();
     } catch (error) {
-      toast.error(error.response.data.message, {
+      // props.refreshData();
+      toast.error(error?.response?.data?.message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import AddUser from "../Components/AddUser";
 import Backdrop from "../Components/Backdrop";
 import { useSelector } from "react-redux";
@@ -35,7 +35,6 @@ const UserDetails = (props) => {
           withCredentials: true,
         }
       );
-    
 
       dispatch(loadingAction.setLoading(false));
       localStorage.removeItem("isAuthenticated");
@@ -52,7 +51,6 @@ const UserDetails = (props) => {
       });
       // alert("logged Out successfulyy");
     } catch (error) {
-      
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 3000,
@@ -71,7 +69,13 @@ const UserDetails = (props) => {
 
   return (
     <>
-      <div className="userList-container userList-user">
+      <div
+        className={
+          props.showProfile
+            ? "userList-container userList-user active"
+            : "userList-container userList-user"
+        }
+      >
         <div
           style={{
             display: "flex",
@@ -91,21 +95,27 @@ const UserDetails = (props) => {
             Log Out
           </button>
         </div>
-        <img
-          src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
-          width="100"
-          height="100"
-          className="user-img user-panel-img"
-        />
-        <div className="user-name">{data?.name}</div>
+        <div className="user-profile-img-cont">
+          <div>
+            <img
+              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+              width="100"
+              height="100"
+              className="user-img user-panel-img"
+            />
+            <div className="user-name">{data?.name}</div>
 
-        <div className="user-metadata">
-          <li className="user-li">{data?.email}</li>
-          <li className="user-li">{data?.location}</li>
-          <li className="user-li"> {data?.createdAt}</li>
+            <div className="user-metadata">
+              <li className="user-li">{data?.email}</li>
+              <li className="user-li">{data?.location}</li>
+              <li className="user-li"> {data?.createdAt}</li>
+            </div>
+          </div>
+
+          <Weather location={data.location} />
         </div>
-        <Weather location={data.location} />
       </div>
+
       {showFormModal && (
         <AddUser
           showModal={showModal}

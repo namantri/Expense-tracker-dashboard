@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import "./Weather.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Weather = (props) => {
   const [tempInfo, setTempInfo] = useState({});
   const [weatherState, setWeatherState] = useState("");

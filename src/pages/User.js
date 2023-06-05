@@ -8,8 +8,10 @@ import UserDashboard from "../user/UserDashboard";
 import UserLeftPart from "../user/UserLeftPart";
 import "./User.css";
 import UserDetails from "../user/UserDetails";
-const User = () => {
+const User = ({ screenSize }) => {
   const [refresh, setRefresh] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const refreshData = () => {
     setRefresh((prev) => !prev);
   };
@@ -74,9 +76,19 @@ const User = () => {
   }, [refresh]);
   return (
     <div className="user-panel">
-      <UserLeftPart />
+      <div className={screenSize < 1000 ? "nav user" : "nav user hide"}>
+        <i
+          className="fa fa-bars icon bars"
+          onClick={() => setShowNav((prev) => !prev)}
+        ></i>
+        <i
+          class={screenSize<700?"fa-solid fa-user user-icon":"fa-solid fa-user user-icon hide"}
+          onClick={() => setShowProfile((prev) => !prev)}
+        ></i>
+      </div>
+      <UserLeftPart showNav={showNav} />
       <UserDashboard refreshData={refreshData} />
-      <UserDetails refreshData={refreshData} />
+      <UserDetails refreshData={refreshData} showProfile={showProfile} />
     </div>
   );
 };

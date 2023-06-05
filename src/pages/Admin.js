@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Navbar from "../Components/Navbar";
 import Backdrop from "../Components/Backdrop";
 import ShowExtraData from "../Components/ShowExtraData";
@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 import { dataAction } from "../Store/userData";
 import { expenseDataAction } from "../Store/expenseData";
 import axios from "axios";
-const Admin = ({ toggleSidebar, sidebar }) => {
+const Admin = ({ toggleSidebar, sidebar, screenSize }) => {
+  const [showProfile, setShowProfile] = useState(false);
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -22,9 +23,8 @@ const Admin = ({ toggleSidebar, sidebar }) => {
           withCredentials: true,
         }
       );
-      
+
       dispatch(dataAction.setData(res.data.users));
-   
     } catch (error) {
       toast.error(error, {
         position: "top-center",
@@ -50,9 +50,8 @@ const Admin = ({ toggleSidebar, sidebar }) => {
           withCredentials: true,
         }
       );
-     
+
       dispatch(expenseDataAction.setExpenseData(res.data.users));
-    
     } catch (error) {
       toast.error(error, {
         position: "top-center",
@@ -72,11 +71,15 @@ const Admin = ({ toggleSidebar, sidebar }) => {
   }, []);
   return (
     <>
-      <Navbar toggleSidebar={toggleSidebar} />
+      <Navbar
+        toggleSidebar={toggleSidebar}
+        screenSize={screenSize}
+        setShowProfile={setShowProfile}
+      />
       <div className="App">
         {sidebar && <ShowExtraData toggleSidebar={toggleSidebar} />}
         <Dashboard />
-        <UserList getData={getData} />
+        <UserList getData={getData} showProfile={showProfile}/>
         {sidebar && <Backdrop showModal={toggleSidebar}></Backdrop>}
       </div>
     </>

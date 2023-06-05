@@ -14,7 +14,7 @@
   align-self: center;
   align-items: center;
   background-color: white;
-  padding: 40px 20px;
+  padding: 40px 1vw;
   border-radius: 20px;
 }
 
@@ -46,7 +46,7 @@ label {
   width: fit-content;
   position: fixed;
   z-index: 3;
-  margin-left: 27vw;
+  margin-left: 34vw;
   animation: anime;
   animation-duration: 0.5s;
 }
@@ -90,4 +90,9 @@ label {
 }
 .btn-crud:active {
   transform: scale(0.9);
+}
+@media (max-width: 500px) {
+  .addUserData{
+    margin-left: 30vw;
+  }
 }

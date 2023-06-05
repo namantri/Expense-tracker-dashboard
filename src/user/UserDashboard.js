@@ -22,6 +22,7 @@ const UserDashboard = (props) => {
   const [totalExpense, setTotalExpense] = useState("");
   const [monthlyExpense, setMonthlyExpense] = useState("");
   const [dailyExpense, setDailyExpense] = useState("");
+
   const bar = useSelector((state) => state.showGraph.bar);
   const pie = useSelector((state) => state.showGraph.pie);
   const line = useSelector((state) => state.showGraph.line);
@@ -33,6 +34,7 @@ const UserDashboard = (props) => {
   const toggleDeleteMdoal = () => {
     setShowDeleteModal((prev) => !prev);
   };
+
   const [datePicker, setDatePicker] = useState({
     from: "",
     to: "",
@@ -325,6 +327,7 @@ const UserDashboard = (props) => {
 
   return (
     <>
+     
       <div className="dashboard-container user-dashboard-container">
         <div className="dashboard">
           <div className="dashboard-header">

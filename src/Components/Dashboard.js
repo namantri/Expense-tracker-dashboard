@@ -266,7 +266,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <div style={{ marginBottom: "80px" }}>
+        <div
+          style={{
+            marginBottom: "80px",
+          }}
+        >
           <h1 style={{ color: "grey", textAlign: "center" }}>Users Data</h1>
 
           <div className="table-container">

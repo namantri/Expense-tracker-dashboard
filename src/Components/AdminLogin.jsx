@@ -40,6 +40,7 @@ const AdminLogin = () => {
       );
 
       dispatch(loadingAction.setLoading(false));
+      localStorage.setItem("isAuthenticated", true);
       dispatch(userAuthAction.setIsAuthenticated(true));
       toast.success(`Hello,${response.data.message}`, {
         position: "top-center",

@@ -1,43 +1,74 @@
-.userList-user{
+.userList-user {
   margin: 0%;
 }
 
-.userList-container{
-    border-left: 1px solid gray;
+.userList-container {
+  border-left: 1px solid gray;
 }
 
-.user-panel-img{
-    margin-top: 5vh;
-    margin-bottom: 2vh;
+.user-panel-img {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
 }
-.user-name{
-    line-height: 30px;
-}
-
-.user-metadata{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    list-style-type: none;
-    font-weight: 400;
-    color: rgb(85, 84, 84);
-    font-style: italic;
+.user-name {
+  line-height: 30px;
 }
 
-.user-li{
-    margin-top: 5px;
+.user-metadata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  font-weight: 400;
+  color: rgb(85, 84, 84);
+  font-style: italic;
 }
 
-.user-login-btn{
-    background-color: #5161ce;
+.user-li {
+  margin-top: 5px;
+}
+
+.user-login-btn {
+  background-color: #5161ce;
+  color: white;
+  /* margin-left: 0; */
+  margin-left: 70px;
+  margin-top: 5px;
+}
+.user-expense-btn {
+  margin: 0;
+}
+.btn-crud.add.user-expense-btn {
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .userList-container.userList-user.userList-user {
+    transform: translatey(-100%);
+    height: 50vh;
+    width: 100vw;
+    background: #5161ce;
     color: white;
-    /* margin-left: 0; */
-    margin-left: 70px;
-    margin-top: 5px;
-}
-.user-expense-btn{
+  }
+  .user-profile-img-cont {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .weather-card {
+    width: 40%;
+    box-shadow: 0px 0px 0px;
     margin: 0;
-}
-.btn-crud.add.user-expense-btn{
-    margin: 0;
+    height: 50%;
+    margin-top: 15%;
+  }
+  .user-metadata {
+    color: white;
+  }
+  .dashboard-container.user-dashboard-container {
+    width: 100vw;
+  }
+  .userList-container.userList-user.userList-user.active {
+    transform: translateY(0%);
+    transition: all 0.3s ease-in-out;
+  }
 }

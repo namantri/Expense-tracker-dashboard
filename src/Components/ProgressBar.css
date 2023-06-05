@@ -33,6 +33,11 @@
   display: grid;
   place-items: center;
 }
+@media (max-width:700px) {
+  .myProgress{
+    width: 90vw;
+  }
+}
 /* .myBar::before {
     margin-top: 5px;
     content: "0";

@@ -20,7 +20,6 @@ const AddUser = (props) => {
   const onChangeHandler = (event) => {
     setError();
     setData({ ...data, [event.target.name]: event.target.value });
-   
   };
   const { category, expense, description, date } = data;
   const submitAction = async (e) => {
@@ -37,7 +36,7 @@ const AddUser = (props) => {
           withCredentials: true,
         }
       );
-      toast.success(response.data.message, {
+     toast.success(response?.data?.message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -50,7 +49,7 @@ const AddUser = (props) => {
       props.refreshData();
     } catch (error) {
       // alert(error.response.data.message);
-      toast.error(error.response.data.message, {
+      toast.error(error?.response?.data?.message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -91,64 +90,28 @@ const AddUser = (props) => {
       submitAction(e);
     }
   }
- 
+
   return (
     <div className="addUserData">
       <form onSubmit={submitCheck}>
         <div className="formContainer">
-          {/* <br></br> */}
-          {/* <input
-            name="name"
-            type={"text"}
-            className={"inputControl"}
-            placeholder={"Enter Your UserName"}
-            value={name}
-            onChange={onChangeHandler}
-          ></input> */}
           <h2>Add Expense</h2>
           <TextField
             label="UserName"
             variant="outlined"
             name="name"
             type={"text"}
-            sx={{ width: "400px", marginBottom: "15px" }}
+            sx={{ width: "30vw", marginBottom: "15px" }}
             value={props.name}
             onChange={onChangeHandler}
             disabled={true}
           />
-          {/* <br></br> */}
-          {/* <label htmlFor="Category">Category:</label> */}
-          {/* <br></br> */}
-          {/* <input
-            name="category"
-            type={"text"}
-            className={"inputControl"}
-            placeholder={"Select Ypur Category"}
-            value={category}
-            onChange={onChangeHandler}
-          ></input> */}
-          {/* <select
-            id="cars"
-            name="category"
-            onChange={onChangeHandler}
-            className={"inputControl option"}
-          >
-            <option name="category" value="" selected>
-              Select Your Category
-            </option>
-            <option name="category" value="Necessary">
-              Necessary
-            </option>
-            <option name="category" value="Entertainment">
-              Entertainment
-            </option>
-          </select> */}
 
           <FormControl>
             <InputLabel id="test-select-label">Category</InputLabel>
 
             <Select
-              sx={{ width: "400px", marginBottom: "15px" }}
+              sx={{ width: "30vw", marginBottom: "15px" }}
               id="demo-simple-select-label"
               name="category"
               labelId="test-select-label"
@@ -164,69 +127,36 @@ const AddUser = (props) => {
               </MenuItem>
             </Select>
           </FormControl>
-          {/* <br></br> */}
-          {/* <label htmlFor="Expense">Expense:</label> */}
-          {/* <br></br> */}
 
-          {/* <input
-            name="expense"
-            type={"number"}
-            className={"inputControl"}
-            placeholder={"Enter Your Expense"}
-            value={expense}
-            onChange={onChangeHandler}
-          ></input> */}
           <TextField
             label="Expense"
             variant="outlined"
-            sx={{ width: "400px", marginBottom: "15px" }}
+            sx={{ width: "30vw", marginBottom: "15px" }}
             name="expense"
             type={"number"}
             value={expense}
             onChange={onChangeHandler}
           />
-          {/* <br></br> */}
-          {/* <label htmlFor="username">Item Name:</label> */}
-          {/* <br></br> */}
 
-          {/* <input
-            name="itemName"
-            type={"text"}
-            className={"inputControl"}
-            placeholder={"Enter Your Item Name"}
-            value={itemName}
-            onChange={onChangeHandler}
-          ></input> */}
           <TextField
             label="Description"
             variant="outlined"
-            sx={{ width: "400px", marginBottom: "15px" }}
+            sx={{ width: "30vw", marginBottom: "15px" }}
             name="description"
             type={"text"}
             value={description}
             onChange={onChangeHandler}
           />
-          {/* <br></br> */}
-          {/* <label htmlFor="website">Date:</label> */}
-          {/* <br></br> */}
 
-          {/* <input
-            name="date"
-            type={"date"}
-            className={"inputControl"}
-            placeholder={"Enter Your Website"}
-            value={date}
-            onChange={onChangeHandler}
-          ></input> */}
           <TextField
             variant="outlined"
-            sx={{ width: "400px", marginBottom: "15px" }}
+            sx={{ width: "30vw", marginBottom: "15px" }}
             name="date"
             type={"date"}
             value={date}
             onChange={onChangeHandler}
           />
-          {/* <br></br> */}
+
           <div style={{ color: "red" }}>{error}</div>
           <div>
             <button type="submit" className="btn-crud sub">
@@ -240,7 +170,6 @@ const AddUser = (props) => {
               Back
             </button>
           </div>
-          {/* <br></br> */}
         </div>
       </form>
     </div>

@@ -31,6 +31,7 @@ const Table = ({ userRows, userColumns }) => {
       }}
       pageSizeOptions={[5, 10]}
     />
+    
   );
 };
 

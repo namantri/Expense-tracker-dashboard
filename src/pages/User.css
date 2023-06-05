@@ -1,3 +1,16 @@
 .user-panel {
   display: flex;
 }
+.nav.user.hide {
+  display: none;
+}
+.nav.user {
+  display: flex;
+  justify-content: space-between;
+}
+.user-icon {
+  margin-right: 30px;
+}
+.user-icon.hide{
+  display: none;
+}

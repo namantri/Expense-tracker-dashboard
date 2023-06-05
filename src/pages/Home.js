@@ -7,10 +7,11 @@ import logoicon from "../Components/logobg.png";
 import scrollLogo from "../Components/logoscrolled.png";
 import Chatboto from "./Chatboto";
 import { useRef } from "react";
-const Home = () => {
+const Home = ({ screenSize }) => {
   const ref = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const [toggler, setToggler] = useState(false);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset !== 0);
     return () => (window.onscroll = null);
@@ -19,6 +20,11 @@ const Home = () => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const getClassName = () => {
+    if (screenSize < 660 && toggler) return "home-options active show";
+    else if (screenSize < 660) return "home-options active";
+    else return "home-options";
+  };
   return (
     <div
       className="home-container"
@@ -27,16 +33,28 @@ const Home = () => {
       <Chatboto />
       <span id="top"></span>
       <div className={isScrolled ? "home-nav" : "home-nav scrolled"} id="top">
-        <img
-          src={isScrolled ? scrollLogo : logoicon}
-          alt=" "
-          className="app-logo"
-        />
-        <h2 className={isScrolled ? "app-name scrolled" : "app-name"}>
-          MoneyLogic
-        </h2>
-        <div className="space"></div>
-        <div className="home-options">
+        <div style={{ marginLeft: "40px", display: "flex" }}>
+          <img
+            src={isScrolled ? scrollLogo : logoicon}
+            alt=" "
+            className="app-logo"
+          />
+          <h2 className={isScrolled ? "app-name scrolled" : "app-name"}>
+            MoneyLogic
+          </h2>
+        </div>
+        {/* <div className="space"></div> */}
+        <button
+          className={screenSize < 660 ? "nav-options active" : "nav-options"}
+          onClick={() => setToggler((prev) => !prev)}
+          style={isScrolled ? { color: "white" } : { color: "black" }}
+        >
+          <i className="fa fa-bars fa-2x"></i>
+        </button>
+        <div
+          // className={screenSize < 660 ? "home-options active " : "home-options"}
+          className={getClassName()}
+        >
           <a
             onClick={handleClick}
             className={isScrolled ? "about-section scrolled" : "about-section"}
@@ -113,7 +131,7 @@ const Home = () => {
           <AnimationOnScroll
             duration={0.7}
             animateIn="animate__slideInRight"
-            // animateOnce={true}
+            animateOnce={true}
           >
             <div className="adv-text">
               <h2>Simple money tracker</h2>

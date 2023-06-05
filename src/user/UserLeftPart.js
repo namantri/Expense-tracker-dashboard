@@ -7,7 +7,7 @@ import { showGraphAction } from "../Store/showGraph";
 import { useDispatch } from "react-redux";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const UserLeftPart = () => {
+const UserLeftPart = (props) => {
   const dispatch = useDispatch();
   const [entertainment, setEntertainment] = useState("");
   const [necessary, setNecessary] = useState("");
@@ -59,7 +59,7 @@ const UserLeftPart = () => {
   }, [userExpenseData]);
 
   return (
-    <div className="showExtraData-container user-left-part">
+    <div className={props.showNav?"showExtraData-container user-left-part active":"showExtraData-container user-left-part"}>
       <div className="circle-card">
         <div className="user-graph">
           <Doughnut data={Edata} options={{ cutoutPercentage: 40 }} />

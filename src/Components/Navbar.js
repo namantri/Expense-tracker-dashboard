@@ -24,9 +24,9 @@ const Navbar = (props) => {
           withCredentials: true,
         }
       );
-    
 
       dispatch(loadingAction.setLoading(false));
+      localStorage.removeItem("isAuthenticated");
       dispatch(userAuthAction.setIsAuthenticated(false));
       toast.success(`Logged Out Successfully`, {
         position: "top-center",
@@ -38,9 +38,7 @@ const Navbar = (props) => {
         progress: undefined,
         theme: "light",
       });
-     
     } catch (error) {
-    
       toast.error(error.response.data.message, {
         position: "top-center",
         autoClose: 5000,
@@ -59,21 +57,31 @@ const Navbar = (props) => {
   return (
     <div className="nav">
       <i className="fa fa-bars icon bars" onClick={props.toggleSidebar}></i>
-      <select className="language-selection">
-        <option value={""} selected>
-          Language
-        </option>
-        <option value={"english"}>English</option>
-        <option value={"german"}>German</option>
-      </select>
-      <button
-        className="login"
-        type="button"
-        disabled={loading}
-        onClick={logoutHandler}
-      >
-        Log Out
-      </button>
+      <div style={{ marginRight: "30px" }}>
+        <select className="language-selection">
+          <option value={""} selected>
+            Language
+          </option>
+          <option value={"english"}>English</option>
+          <option value={"german"}>German</option>
+        </select>
+        <button
+          className="login"
+          type="button"
+          disabled={loading}
+          onClick={logoutHandler}
+        >
+          Log Out
+        </button>
+        <i
+          class={
+            props.screenSize < 1000
+              ? "fa-solid fa-user admin-icon"
+              : "fa-solid fa-user admin-icon hide"
+          }
+          onClick={() => props.setShowProfile((prev) => !prev)}
+        ></i>
+      </div>
     </div>
   );
 };
