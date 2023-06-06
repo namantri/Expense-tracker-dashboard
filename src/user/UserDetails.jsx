@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddUser from "../Components/AddUser";
 import Backdrop from "../Components/Backdrop";
 import { useSelector } from "react-redux";
@@ -12,9 +12,16 @@ import { userAuthAction } from "../Store/UserAuth";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { loadingAction } from "../Store/loading";
+// import { serverTimestamp, setDoc, getDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 const UserDetails = (props) => {
   const [showFormModal, setShowFormModal] = useState(false);
+  const [file, setFile] = useState("");
+  // const [per, setPerc] = useState(null);
+  // const [downloadLink, setDownloadLink] = useState("");
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
@@ -25,6 +32,90 @@ const UserDetails = (props) => {
   };
 
   const data = useSelector((state) => state.userDetailData.userDetailData);
+  // console.log(data);
+
+  useEffect(() => {
+    const uploadFile = async () => {
+      const name = new Date().getTime() + file.name;
+
+      console.log(name);
+
+      const storageRef = ref(storage, file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // const progress =
+          //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // setPerc(progress);
+          // setPerc(progress);
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            // setDownloadLink(downloadURL);
+            try {
+              const response = await axios.put(
+                `https://nodejs-expense-tracker-mern-backend.onrender.com/api/v1/users/addImage`,
+                {
+                  imgSrc: `${downloadURL}`,
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  // for cookie otherwise cookie will not work
+                  withCredentials: true,
+                }
+              );
+
+              toast.success(response?.data?.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+              props.refreshData();
+            } catch (error) {
+              toast.error(error?.response?.data?.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+          });
+          // console.log("New  " + downloadURL);
+        }
+      );
+      console.log("Entered Upload File");
+      // console.log(per);
+    };
+    // console.log(downloadLink);
+    file && uploadFile();
+  }, [file]);
+  // console.log(downloadLink);
   const logoutHandler = async () => {
     dispatch(loadingAction.setLoading(true));
     try {
@@ -66,7 +157,6 @@ const UserDetails = (props) => {
     }
   };
   if (!isAuthenticated) return <Navigate to={"/"} />;
-
   return (
     <>
       <div
@@ -97,12 +187,40 @@ const UserDetails = (props) => {
         </div>
         <div className="user-profile-img-cont">
           <div>
-            <img
-              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
-              width="100"
-              height="100"
-              className="user-img user-panel-img"
-            />
+            {data.imgSrc === "#" || data.imgSrc === "" ? (
+              <>
+                <img
+                  src={
+                    file
+                      ? URL.createObjectURL(file)
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  alt=""
+                  width="100"
+                  height="100"
+                  className="user-img user-panel-img"
+                />
+                <div className="imgUpload-container">
+                  <label htmlFor="file" className="img-upload-link">
+                    Upload image
+                  </label>
+                  <input
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    id="file"
+                    style={{ display: "none" }}
+                  />
+                </div>
+              </>
+            ) : (
+              <img
+                src={data.imgSrc}
+                alt=""
+                width="100"
+                height="100"
+                className="user-img user-panel-img"
+              />
+            )}
             <div className="user-name">{data?.name}</div>
 
             <div className="user-metadata">

@@ -240,7 +240,7 @@ const Dashboard = () => {
       <div className="graph-data">
         <div className="graph-show">
           {bar && <BarChart chartData={userChartData}></BarChart>}
-          {pie && <PieChart chartData={userChartData}></PieChart>}
+          {pie && <PieChart chartData={userChartData} height={60}></PieChart>}
           {line && <LineChart chartData={userChartData}></LineChart>}
         </div>
         <div className="graph">

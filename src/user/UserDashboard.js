@@ -327,7 +327,6 @@ const UserDashboard = (props) => {
 
   return (
     <>
-     
       <div className="dashboard-container user-dashboard-container">
         <div className="dashboard">
           <div className="dashboard-header">
@@ -386,7 +385,7 @@ const UserDashboard = (props) => {
           </div>
 
           {bar && <BarChart chartData={userChartData}></BarChart>}
-          {pie && <PieChart chartData={userChartData}></PieChart>}
+          {pie && <PieChart chartData={userChartData} height={90}></PieChart>}
           {line && <LineChart chartData={userChartData}></LineChart>}
         </div>
         <div style={{ marginBottom: "80px" }}>
